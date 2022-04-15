@@ -1,0 +1,12 @@
+<div class="row mb-3" th:each="origin : ${origins}">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" th:text="${origin.getName()}"></h4>
+                <p class="card-text" th:text="${origin.getDescription()}"></p>
+                <a th:href="|/ui/character/${character.getId()}/builder/origin/${origin.getId}|"
+                   class="btn btn-primary">Details&rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>

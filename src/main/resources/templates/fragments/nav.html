@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Characters</a></li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item pr-4" sec:authorize="isAuthenticated()">
+                <a href="/">
+                    <i class="fa fa-user"></i>
+                    <span sec:authentication="name"></span>
+                </a>
+            </li>
+            <li class="nav-item"><a href="/logout"><i class="fa fa-lock"></i> Sign out</a></li>
+        </ul>
+    </div>
+</nav>

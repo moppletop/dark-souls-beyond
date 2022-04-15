@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments/root :: head"/>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sheet.css}">
+    <script th:src="@{/js/sheet.js}"></script>
+</head>
+
+<body>
+
+<nav th:insert="fragments/nav"></nav>
+
+<div class="dsb-body justify-content-center flex-column">
+    <div class="inner-wrapper mt-auto mb-auto container">
+
+        <div class="row">
+            <div class="col-md-5 mt-4">
+                <h1 class="text-white" th:text="${title}"></h1>
+            </div>
+
+            <div class="col mt-4">
+                <div th:replace="sheet/short-rest"></div>
+            </div>
+
+            <div class="col mt-4">
+                <div th:replace="sheet/long-rest"></div>
+            </div>
+
+            <div class="col mt-4" th:if="${character.getLevel() < 20}">
+                <a th:href="|/ui/character/${character.getId()}/level-up|">
+                    <button class="btn btn-pill btn-success btn-fill"><i class="fa fa-arrow-up"></i> Level up</button>
+                </a>
+            </div>
+
+            <div class="col mt-4">
+                <a th:href="|/ui/character/${character.getId()}/builder/class-features|">
+                    <button class="btn btn-pill btn-primary btn-fill"><i class="fa fa-book"></i> Builder</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <p class="text-white">
+                    <b th:text="|Level ${character.getLevel()} ${character.getCharacterClass().getName()} with ${character.getOrigin().getName()} origin|"></b>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md">
+                <h2 class="text-white">Ability Scores</h2>
+
+                <div class="col pl-0">
+                    <div th:replace="sheet/ability-scores"></div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <h2 th:unless="${character.isBloodied()}" class="text-white">Position</h2>
+                <div th:replace="sheet/bloodied"></div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div th:replace="sheet/position"></div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div th:replace="sheet/proficiency-bonus"></div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div th:replace="sheet/speed"></div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div th:replace="sheet/armour-class"></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xl-4">
+                <h2 class="text-white">Skills</h2>
+
+                <div class="col pl-0">
+                    <div th:replace="sheet/skills"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="row">
+                    <h2 class="text-white">Saving throws</h2>
+
+                    <div class="col-lg pl-0">
+                        <div th:replace="sheet/saving-throws"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-white">Souls</h2>
+                    </div>
+
+                    <div class="col">
+                        <div th:replace="sheet/souls"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <h2 class="text-white">Passives</h2>
+
+                <div class="row">
+
+                    <div class="col-sm">
+                        <div th:replace="sheet/initiative"></div>
+                    </div>
+
+                    <div class="col-sm">
+                        <div th:replace="sheet/resistances"></div>
+                    </div>
+
+                    <div class="col-sm">
+                        <div th:replace="sheet/passives"></div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <h2 class="text-white">Sub-Pages</h2>
+                    </div>
+
+                    <div class="col-12">
+                        <div th:replace="sheet/inventory"></div>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div th:replace="sheet/spell-page"></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xl-6">
+                <h2 class="text-white">Actions</h2>
+
+                <div class="col pl-0">
+                    <div th:replace="sheet/actions"></div>
+                </div>
+            </div>
+
+            <div class="col-xl-6" th:if="${character.getCharacterClass().isSpellCaster()}">
+                <h2 class="text-white">Spell Actions</h2>
+
+                <div class="col pl-0">
+                    <div th:replace="sheet/spell-actions"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div th:replace="sheet/you-died"></div>
+
+    </div>
+</div>
+
+</body>
+
+</html>

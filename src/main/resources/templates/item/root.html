@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments/root :: head"/>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/item.css}">
+    <script th:src="@{/js/item.js}"></script>
+</head>
+
+<body>
+
+<nav th:insert="fragments/nav"></nav>
+
+<div class="dsb-body justify-content-center flex-column">
+    <div class="inner-wrapper mt-auto mb-auto container">
+
+        <div class="row">
+            <div class="col-md-10 mt-4">
+                <h1 class="text-white" th:text="${title}"></h1>
+            </div>
+
+            <div class="col mt-4">
+                <a th:href="|/ui/character/${character.getId()}|">
+                    <button class="btn btn-pill btn-primary btn-fill"><i class="fa fa-user"></i> Character sheet
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 mt-4">
+                <h2 class="text-white">Inventory</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <i class="text-white">Clicking on the name of an item will search for its details in the table below.</i>
+            </div>
+        </div>
+
+        <div th:replace="item/inventory"></div>
+
+        <div class="row">
+            <div class="col-md-10 mt-4">
+                <h2 class="text-white">Search</h2>
+            </div>
+        </div>
+
+        <div th:replace="item/search"></div>
+    </div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<div class="card mb-4">
+    <div class="card-body scrollable">
+        <table class="table" id="table-content">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Cost</th>
+                <th>Requirements</th>
+                <th>Effects</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.getName()}"></td>
+                <td th:text="${item.getDescription()}"></td>
+                <td th:text="${item.getCategory().getName()}"></td>
+                <td th:text="${item.getCost()}"></td>
+                <td>
+                    <p th:each="requirement : ${item.getRequirements()}" th:text="${requirement.getDescription()}">
+                    </p>
+                </td>
+                <td>
+                    <ul>
+                        <li th:each="effects : ${item.getEffects()}" th:text="${effects.getDescription()}">
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <div th:if="${item.getEquipmentType() == null}">
+                        <button class="btn btn-pill btn-success" data-toggle="modal"
+                                th:data-target="|#add-item-${item.hashCode()}|">
+                            Add
+                        </button>
+
+                        <div class="modal fade" th:id="|add-item-${item.hashCode()}|" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" th:text="${item.getName()}"></h5>
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label th:for="${item.hashCode()}">Amount</label>
+                                        <input type="text" class="form-control" th:id="${item.hashCode()}">
+                                        <p>You will have to remove the cost of the item if you are buying it
+                                            separately.
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                                th:data-amount="${item.hashCode()}"
+                                                th:data-item="${item.getName()}"
+                                                th:onclick="|addItem(${character.getId()}, this)|">
+                                            OK
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div th:unless="${item.getEquipmentType() == null}">
+                        <button class="btn btn-pill btn-success" data-toggle="modal"
+                                th:data-target="|#equip-item-${item.hashCode()}|">Equip
+                        </button>
+
+                        <div class="modal fade" th:id="|equip-item-${item.hashCode()}|" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" th:text="${item.getName()}"></h5>
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>You will have to remove the cost of the item if you are buying it
+                                            separately.</p>
+                                        <p>Select below which slot you wish to equip this item in:</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                                th:each="slot : ${item.getEquipmentType().getSlots()}"
+                                                th:text="${slot.getName()}"
+                                                th:data-slot="${slot}"
+                                                th:data-item="${item.getName()}"
+                                                th:onclick="|addItem(${character.getId()}, this)|">
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                th:data-item="${item.getName()}"
+                                                th:onclick="|addItem(${character.getId()}, this)|">
+                                            Inventory
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

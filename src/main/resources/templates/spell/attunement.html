@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="form-group col-md">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="progress-wrapper">
+                    <span class="card-text"
+                          th:text="|Used Attunement Slots: ${character.getUsedAttunementSlots()}/${character.getMaxAttunementSlots}|">
+                    </span>
+                    <div class="progress progress-lg">
+                        <div class="progress-bar" role="progressbar"
+                             th:style="|width: ${attunementPercentage}%|">
+                        </div>
+                    </div>
+
+                    <div class="scrollable">
+                        <table class="table">
+                            <tr>
+                                <th>Spell</th>
+                                <th>Attunement Slots</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr th:each="learntSpell : ${character.getLearntSpells()}">
+                                <td th:text="${learntSpell.getSpell().getName()}"
+                                    th:onclick="|moreSpellInfo(${character.getId()}, this)|"></td>
+                                <td th:text="${learntSpell.getSpell().getSlots()}"></td>
+                                <td>
+                                    <button class="btn btn-pill btn-success"
+                                            th:onclick="|attuneSpell(${character.getId()}, this)|"
+                                            th:data-spell="${learntSpell.getSpell().getName()}"
+                                            th:unless="${learntSpell.isAttuned()}">
+                                        Attune
+                                    </button>
+                                    <button class="btn btn-pill btn-secondary"
+                                            th:onclick="|unattuneSpell(${character.getId()}, this)|"
+                                            th:data-spell="${learntSpell.getSpell().getName()}"
+                                            th:if="${learntSpell.isAttuned()}">
+                                        Unattune
+                                    </button>
+                                    <button class="btn btn-pill btn-danger"
+                                            th:data-spell="${learntSpell.getSpell().getName()}"
+                                            th:onclick="|forgetSpell(${character.getId()}, this)|">
+                                        Forget
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

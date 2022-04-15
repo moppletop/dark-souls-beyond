@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-10">
+                <p th:text="${origin.getDescription()}"></p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-10">
+                <h4 class="card-title" th:text="${origin.getName() + 's are good at:'}"></h4>
+                <p th:text="${origin.getGoodAt()}"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <h4 class="card-title" th:text="${origin.getName() + ' Position'}"></h4>
+                <p><b>Position Dice: </b>
+                    <span th:text="${'Position Dice: ' + origin.getPositionDice().getExpression(1) + ' per level'}"></span>
+                </p>
+                <p><b>Position at 1st Level: </b>
+                    <span th:text="${origin.getPositionDice().getMax() + ' + your Constitution modifier'}"></span>
+                </p>
+                <p><b>Position gained on each Level Up: </b>New Level + your Constitution modifier</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <h4 class="card-title">Bloodied Effects</h4>
+                <p th:text="${'During combat, when reduced to 50% of their starting Position pool, a ' + origin.getName() + ' gains the following benefits:'}"></p>
+                <ul>
+                    <li th:each="effect : ${origin.getBloodiedEffects()}" th:text="${effect.getDescription()}">
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <h4 th:text="${origin.getName() + ' Base Statistics'}"></h4>
+                <ul>
+                    <li th:each="entry : ${origin.getAbilityScores()}">
+                        <b th:text="${entry.getKey().getShorthand() + ': '}"></b>
+                        <span th:text="${entry.getValue()}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-10">
+                <button type="button" class="btn btn-pill btn-primary"
+                        th:onclick="|submitBuilderOrigin(${character.getId()}, ${origin.getId()})|"
+                        th:text="${'Select ' + origin.getName() + ' as your origin'}"></button>
+            </div>
+        </div>
+
+    </div>
+</div>

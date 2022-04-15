@@ -1,0 +1,47 @@
+<div class="card mb-4">
+    <div class="card-body pl-0 pr-0">
+        <table class="table">
+            <tr>
+                <th>Skill</th>
+                <th>Score</th>
+            </tr>
+            <tr th:each="row : ${character.getPassiveScores()}" data-toggle="modal"
+                th:data-target="${'#passive-' + row.getKey().ordinal()}">
+                <td th:text="${row.getKey().getName()}"></td>
+                <td th:text="${10 + row.getValue().getMod()}"></td>
+            </tr>
+        </table>
+
+        <ul th:unless="${character.getAdditionalSenses().isEmpty()}">
+            <li th:each="sense : ${character.getAdditionalSenses()}" th:text="${sense}">
+            </li>
+        </ul>
+
+        <div th:each="entry : ${character.getPassiveScores()}">
+
+            <div class="modal fade" th:id="${'passive-' + entry.getKey().ordinal()}" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" th:text="${entry.getKey().getName() + ' Modifiers'}"></h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul>
+                                <li th:each="modifier : ${character.getPassiveScoreModifiers().get(entry.getKey())}"
+                                    th:text="${modifier}">
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

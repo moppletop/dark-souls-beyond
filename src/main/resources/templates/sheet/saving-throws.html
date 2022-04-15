@@ -1,0 +1,52 @@
+<div class="card mb-4">
+    <div class="card-body pl-1 pr-1">
+        <table class="table">
+            <tr>
+                <th>Ability</th>
+                <th>Roll</th>
+                <th>Bonus</th>
+            </tr>
+            <tr th:each="row : ${character.getSavingThrows()}" data-toggle="modal"
+                th:data-target="${'#saving-throw-' + row.getKey().ordinal()}">
+                <td th:text="${row.getKey().getName()}"></td>
+                <td class="text-success"
+                    th:if="${row.getValue().getRollType()} == null"></td>
+                <td class="text-success"
+                    th:if="${row.getValue().getRollType()} != null and ${row.getValue().getRollType().ordinal()} == 0">
+                    A
+                </td>
+                <td class="text-warning"
+                    th:if="${row.getValue().getRollType()} != null and ${row.getValue().getRollType().ordinal()} == 1">
+                    D
+                </td>
+                <td th:text="${row.getValue().getModSigned()}"></td>
+            </tr>
+        </table>
+
+        <div th:each="entry : ${character.getSavingThrows()}">
+            <div class="modal fade" th:id="${'saving-throw-' + entry.getKey().ordinal()}" tabindex="-1"
+                 role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"
+                                th:text="${entry.getKey().getName() + ' Saving Throw Modifiers'}"></h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul>
+                                <li th:each="modifier : ${character.getSavingThrowModifiers().get(entry.getKey())}" th:text="${modifier}">
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<span id="is-bloodied" th:text="${character.isBloodied()}" hidden></span>
+
+<div class="card mb-4">
+    <div class="card-body pt-2 pb-2">
+
+        <div class="row">
+
+            <div class="col-4">
+                <button class="btn btn-success btn-stacked" th:onclick="|changeHealth(${character.getId()}, true)|">Heal</button>
+                <input type="text" class="form-control btn-stacked" id="heal-damage-input">
+                <button class="btn btn-danger btn-stacked" th:onclick="|changeHealth(${character.getId()}, false)|">Damage</button>
+            </div>
+
+            <div class="col-4">
+                <p class="position-counter" id="position-counter" th:text="|${character.getPosition()}/${character.getMaxPosition()}|"></p>
+            </div>
+
+            <div class="col-4">
+                <button class="btn btn btn-primary btn-stacked" data-toggle="modal" data-target="#start-combat">Start Combat</button>
+                <button class="btn btn-secondary btn-stacked" th:onclick="|setPosition(${character.getId()})|">Set Position</button>
+                <button class="btn btn-warning btn-stacked" th:onclick="|stopCombat(${character.getId()})|">Stop Combat</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="start-combat" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Roll Initiative!</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><i>Remember you only gain your temporary position at the start of your turn.</i></p>
+                <p th:text="|Your temporary position: ${character.getOrigin().getPositionDice().getExpression(character.getLevel())}|"></p>
+                <label for="combat-position-input">Your roll:</label>
+                <input type="text" class="form-control" id="combat-position-input">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" th:onclick="|startCombat(${character.getId()})|">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

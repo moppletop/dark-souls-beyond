@@ -1,0 +1,23 @@
+<h2 th:if="${character.isBloodied()}" class="text-danger" data-toggle="modal" data-target="#bloodied">Bloodied <i class="fa fa-tint"></i></h2>
+
+<div th:if="${character.isBloodied()}" class="modal fade" id="bloodied" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Origin Bloodied Effects</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li th:each="modifier : ${character.getOrigin().getBloodiedEffects()}" th:text="${modifier.getDescription()}">
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

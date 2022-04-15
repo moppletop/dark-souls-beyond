@@ -1,0 +1,20 @@
+<button class="btn btn-pill btn-light btn-fill" data-toggle="modal" data-target="#long-rest"><i class="fa fa-bed"></i> Long rest</button>
+
+<div class="modal fade" id="long-rest" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Long Rest</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><i>Remember you can only long rest at a bonfire.</i></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" th:onclick="|longRest(${character.getId()})|">Confirm Long Rest</button>
+            </div>
+        </div>
+    </div>
+</div>

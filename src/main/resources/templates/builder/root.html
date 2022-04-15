@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments/root :: head"/>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/builder.css}">
+    <script th:src="@{/js/builder.js}"></script>
+</head>
+
+<body>
+
+<nav th:insert="fragments/nav"></nav>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#builderNavbarNavDropdown"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse mr-auto" id="builderNavbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" th:onclick="|goTo(${character.getId()}, 'character')|">Character Info</a></li>
+            <li class="nav-item" th:unless="${character.getOrigin() == null}"><a class="nav-link" th:onclick="|goTo(${character.getId()}, 'origin')|">Origin</a></li>
+            <li class="nav-item" th:unless="${character.getCharacterClass() == null}"><a class="nav-link" th:onclick="|goTo(${character.getId()}, 'class')|">Class</a></li>
+            <li class="nav-item" th:unless="${character.getCharacterClass() == null}"><a class="nav-link" th:onclick="|goTo(${character.getId()}, 'class-features')|">Class Features</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="dsb-body justify-content-center flex-column">
+    <div class="inner-wrapper mt-auto mb-auto container">
+
+        <div class="row">
+            <div class="col-md-10 mt-4">
+                <button class="btn btn-pill btn-secondary" onclick="history.back()">Go Back</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 mt-4">
+                <h1 class="display-4 text-white" th:text="${title}"></h1>
+            </div>
+        </div>
+
+        <div th:replace="${'builder/' + fragment}"></div>
+
+    </div>
+</div>
+</body>
+
+</html>

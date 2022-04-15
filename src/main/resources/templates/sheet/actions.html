@@ -1,0 +1,59 @@
+<div class="card mb-4">
+    <div class="card-body">
+
+        <table class="table">
+            <tr>
+                <th>Action Type</th>
+                <th>Name</th>
+                <th>Range</th>
+                <th>Hit</th>
+                <th>Effect</th>
+                <th>Extra</th>
+            </tr>
+            <tr th:each="row : ${character.getWeaponActions()}">
+                <td th:text="${row.getActionType().getName()}"></td>
+                <td th:text="${row.getWeapon().getName()}"></td>
+                <td th:text="${row.getRangeDescription()}"></td>
+                <td th:text="'+' + ${row.getHitBonus()}"></td>
+                <td th:text="${row.getDamage()}"></td>
+                <td th:text="${row.getNote()}"></td>
+            </tr>
+        </table>
+
+        <div th:each="entry : ${abilityActions}">
+            <h4 class="card-title" th:text="${entry.getKey().getName()}"></h4>
+
+            <div th:each="action : ${entry.getValue()}">
+                <p class="card-title" th:text="${action.getSource().getName()}"></p>
+                <p class="card-text" th:text="${action.getDescription()}"></p>
+
+                <div class="row mb-2" th:if="${abilityActionUses.containsKey(action)}">
+
+                    <div class="col-1 ml-3 pl-0 pr-0">
+                        <button class="btn btn-danger btn-stacked"
+                                th:data-key="${action.getName()}"
+                                th:data-counter="${action.hashCode()}"
+                                th:onclick="|setUses(${character.getId()}, this, false)|">
+                            <i class="fa fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <div class="col-2  pl-0 pr-0 center">
+                        <span th:id="${action.hashCode()}" th:text="${abilityActionUses.get(action)}"></span>
+                    </div>
+
+                    <div class="col-1 pl-0 pr-0">
+                        <button class="btn btn-success btn-stacked"
+                                th:data-key="${action.getName()}"
+                                th:data-counter="${action.hashCode()}"
+                                th:onclick="|setUses(${character.getId()}, this, true)|">
+                            <i class="fa fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="card mb-4" data-toggle="modal" data-target="#speed">
+    <div class="card-body">
+        <p class="card-title mb-0">Speed <i class="fa fa-arrow-right"></i></p>
+        <p class="card-text" th:text="${character.getSpeed()}"></p>
+    </div>
+</div>
+
+<div class="modal fade" id="speed" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Speed Modifiers</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li th:each="modifier : ${character.getSpeedModifiers()}" th:text="${modifier}">
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="form-group col-md-10">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <p class="card-title">Families</p>
+                <fieldset id="families">
+                    <div class="row">
+                        <div class="col-2 custom-control custom-checkbox mb-0"
+                             th:each="family : ${families}">
+                            <input type="radio" class="custom-control-input" name="family"
+                                   th:id="${family}">
+                            <label class="custom-control-label" th:for="${family}"
+                                   th:text="${family.getName()}"></label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="row">
+                    <div class="col-4 mb-3">
+                        <label for="spell-name-input" class="col-form-label card-title mb-0">Name</label>
+                        <input type="text" class="form-control" id="spell-name-input" placeholder="Great Chaos...">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">
+                        <button class="btn btn-pill btn-primary"
+                                th:onclick="|spellSearch(${character.getId()})|"><i
+                                class="fa fa-book"></i> Search
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="form-group col-md" id="table-content">
+    </div>
+</div>

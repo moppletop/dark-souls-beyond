@@ -1,0 +1,6 @@
+spring:
+  web:
+    resources:
+      cache:
+        cachecontrol:
+          max-age: 8h

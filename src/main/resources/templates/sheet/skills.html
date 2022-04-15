@@ -1,0 +1,53 @@
+<div class="card mb-4">
+    <div class="card-body pl-0 pr-0">
+        <table class="table">
+            <tr>
+                <th>Ability</th>
+                <th>Skill</th>
+                <th>Roll</th>
+                <th>Bonus</th>
+            </tr>
+            <tr th:each="row : ${character.getSkills()}" data-toggle="modal"
+                th:data-target="${'#skill-' + row.getKey().ordinal()}">
+                <td th:text="${row.getKey().getAbility().getShorthand()}"></td>
+                <td th:text="${row.getKey().getName()}"></td>
+                <td class="text-success"
+                    th:if="${row.getValue().getRollType()} == null"></td>
+                <td class="text-success"
+                    th:if="${row.getValue().getRollType()} != null and ${row.getValue().getRollType().ordinal()} == 0">A
+                </td>
+                <td class="text-warning"
+                    th:if="${row.getValue().getRollType()} != null and ${row.getValue().getRollType().ordinal()} == 1">D
+                </td>
+                <td th:text="${row.getValue().getModSigned()}"></td>
+            </tr>
+        </table>
+
+        <div th:each="entry : ${character.getSkills()}">
+
+            <div class="modal fade" th:id="${'skill-' + entry.getKey().ordinal()}" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" th:text="${entry.getKey().getName() + ' Modifiers'}"></h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul>
+                                <li th:each="modifier : ${character.getSkillModifiers().get(entry.getKey())}"
+                                    th:text="${modifier}">
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

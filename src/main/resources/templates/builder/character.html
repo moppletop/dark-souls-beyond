@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="card-title" for="character-info-name">Character Name</label>
+                    <input type="text" class="form-control" id="character-info-name" placeholder="Name"
+                           th:value="${character.getName()}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        <button type="button" class="btn btn-pill btn-primary"
+                th:onclick="|submitBuilderCharacter(${character.getId()})|">Next
+        </button>
+    </div>
+</div>

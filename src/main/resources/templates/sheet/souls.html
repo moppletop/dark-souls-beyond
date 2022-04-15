@@ -1,0 +1,19 @@
+<div class="card mb-4">
+    <div class="card-body pt-2 pb-2">
+
+        <div class="row">
+
+            <div class="col-6">
+                <button class="btn btn-success btn-stacked" th:onclick="|addSouls(${character.getId()}, true)|">Add</button>
+                <input type="text" class="form-control btn-stacked" id="souls-input">
+                <button class="btn btn-danger btn-stacked" th:onclick="|addSouls(${character.getId()}, false)|">Subtract</button>
+            </div>
+
+            <div class="col-6">
+                <p class="position-counter" id="souls-counter" th:text="${character.getSoulsOnPerson()}"></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+

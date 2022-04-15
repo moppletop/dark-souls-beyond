@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments/root :: head"/>
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/level-up.css}">
+    <script th:src="@{/js/level-up.js}"></script>
+</head>
+
+<body>
+
+<nav th:insert="fragments/nav"></nav>
+
+<div class="dsb-body justify-content-center flex-column">
+    <div class="inner-wrapper mt-auto mb-auto container">
+
+        <div class="row">
+            <div class="col-md-10 mt-4">
+                <h1 class="text-white" th:text="${title}"></h1>
+            </div>
+
+            <div class="col mt-4">
+                <a th:href="|/ui/character/${character.getId()}|">
+                    <button class="btn btn-pill btn-primary btn-fill"><i class="fa fa-user"></i> Character sheet
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <b class="text-white" th:text="|Next level: ${character.getLevel() + 1}|"></b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <b class="text-white" th:text="|Cost to level up: ${soulsToLevelUp} Souls|"></b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <b class="text-white" th:text="|Current held souls  : ${character.getSoulsOnPerson()}|"></b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <b class="text-white" th:text="|Current banked souls: ${character.getSoulsBanked()}|"></b>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="form-group col-md-10">
+                <i class="text-white">You can bank souls towards leveling up. These are not lost when dying. Once souls
+                    are banked they cannot be used for any purpose other than levelling up.</i>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-10">
+                <label for="banked-souls-input" class="col-form-label text-white">Souls to bank</label>
+                <input type="text" class="form-control" id="banked-souls-input">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-10">
+                <button class="btn btn-pill btn-light" th:onclick="|bankSouls(${character.getId()})|">Bank souls</button>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="form-group col-md-10">
+                <i class="text-white">Souls are deducted from your banked souls first, then your held second. You CANNOT revert a level up!</i>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col mt-4">
+                <button class="btn btn-pill btn-success btn-fill" th:onclick="|levelUp(${character.getId()})|"><i class="fa fa-arrow-up"></i> Spend souls and Level up</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  datasource:
+    url: jdbc:h2:file:./db
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+
+server:
+  servlet:
+    session:
+      cookie:
+        max-age: 8h

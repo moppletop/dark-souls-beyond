@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="form-group col-md">
+
+        <div class="card mb-4">
+            <div class="card-body scrollable">
+                <table class="table">
+                    <tr>
+                        <th>Item</th>
+                        <th>Amount</th>
+                        <th>Slot</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="inventory : ${character.getInventory()}">
+                        <td th:text="${inventory.getItem().getName()}"
+                            th:onclick="|moreItemInfo(${character.getId()}, this)|"></td>
+                        <td th:text="${inventory.getAmount()}"></td>
+                        <td th:if="${inventory.getSlot()} == null">-</td>
+                        <td th:unless="${inventory.getSlot()} == null" th:text="${inventory.getSlot().getName()}"></td>
+                        <td>
+                            <button class="btn btn-pill btn-success"
+                                    th:if="${inventory.getItem().getEquipmentType() != null && !inventory.getItem().getHidden()}"
+                                    data-toggle="modal"
+                                    th:data-target="|#equip-inventory-${inventory.hashCode()}|">
+                                Equip
+                            </button>
+                            <button class="btn btn-pill btn-dark"
+                                    th:if="${inventory.getItem().getEquipmentType() == null && !inventory.getItem().getHidden()}"
+                                    data-toggle="modal"
+                                    th:data-target="|#set-amount-${inventory.hashCode()}|">
+                                Set amount
+                            </button>
+                            <button class="btn btn-pill btn-danger"
+                                    th:unless="${inventory.getItem().getHidden()}"
+                                    th:onclick="|removeItem(${character.getId()}, ${inventory.getId()})|">
+                                Remove all
+                            </button>
+
+                            <div class="modal fade"
+                                 th:if="${inventory.getItem().getEquipmentType() != null && !inventory.getItem().getHidden()}"
+                                 th:id="|equip-inventory-${inventory.hashCode()}|"
+                                 tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" th:text="${inventory.getItem().getName()}"></h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Select below which slot you wish to equip this item in:</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                                    th:each="slot : ${inventory.getItem().getEquipmentType().getSlots()}"
+                                                    th:text="${slot.getName()}"
+                                                    th:data-slot="${slot}"
+                                                    th:onclick="|equipItem(${character.getId()}, ${inventory.getId()}, this)|">
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                    th:onclick="|equipItem(${character.getId()}, ${inventory.getId()}, this)|">
+                                                Put into inventory
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade"
+                                 th:if="${inventory.getItem().getEquipmentType()} == null"
+                                 th:id="|set-amount-${inventory.hashCode()}|"
+                                 tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" th:text="${inventory.getItem().getName()}"></h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label th:for="${inventory.hashCode()}">New Amount</label>
+                                            <input type="text" class="form-control" th:id="${inventory.hashCode()}"
+                                                   th:value="${inventory.getAmount()}">
+                                            <p>
+                                                This does not consume the item. You have to keep track of consumable
+                                                item buffs to your stats or weapons yourself.
+                                                This includes crushable souls.
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                                    th:data-amount="${inventory.hashCode()}"
+                                                    th:onclick="|setItem(${character.getId()}, ${inventory.getId()}, this)|">
+                                                OK
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="card mb-4">
+    <div class="card-body scrollable">
+        <table class="table" id="table-content">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Family</th>
+                <th>Level</th>
+                <th>Cast Time</th>
+                <th>Casts</th>
+                <th>Duration</th>
+                <th>Range</th>
+                <th>Attunement Slots</th>
+                <th>Position Cost</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="spell : ${spells}">
+                <td th:text="${spell.getName()}"></td>
+                <td th:text="${spell.getDescription()}"></td>
+                <td th:text="${spell.getFamily().getName()}"></td>
+                <td th:text="${spell.getLevel()}"></td>
+                <td th:text="${spell.getCastTime()}"></td>
+                <td th:text="${spell.getCasts()}"></td>
+                <td th:text="${spell.getDuration()}"></td>
+                <td th:text="${spell.getRangeDescription()}"></td>
+                <td th:text="${spell.getSlots()}"></td>
+                <td th:if="${spell.getCost()} == null">None</td>
+                <td th:unless="${spell.getCost()} == null" th:text="${spell.getCost()}"></td>
+                <td>
+                    <button class="btn btn-pill btn-success"
+                            th:if="${character.canLearn(spell)}"
+                            th:data-spell="${spell.getName()}"
+                            th:onclick="|learnSpell(${character.getId()}, this)|">
+                        Learn Spell
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

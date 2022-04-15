@@ -1,0 +1,59 @@
+<div class="row" th:each="entry: ${unlockedFeatures}">
+    <div class="col">
+
+        <div class="card mb-4">
+            <div class="card-body">
+
+                <h4 class="card-title mb-0 collapsible" th:text="${'Level ' + entry.getKey()}"></h4>
+                <div class="collapsible-content">
+                    <div th:each="feature : ${entry.getValue()}">
+
+                        <h4 class="card-text mt-3" th:text="${feature.getName()}"></h4>
+
+                        <ul th:unless="${feature.getEffects().isEmpty()}">
+                            <li th:each="effect: ${feature.getEffects()}" th:text="${effect.getDescription()}">
+                            </li>
+                        </ul>
+
+                        <fieldset th:id="${feature.hashCode()}"
+                                  th:data-feature-name="${feature.getName()}"
+                                  th:data-feature-max="${feature.getAllowedOptions()}"
+                                  th:unless="${feature.getOptions().isEmpty()}">
+                            <span class="card-text"
+                                  th:text="|Choose ${feature.getAllowedOptions()} from the following:|"></span>
+                            <div class="custom-control custom-checkbox mb-3" th:each="option : ${feature.getOptions()}">
+                                <input type="checkbox" class="custom-control-input"
+                                       th:if="${character.getClassFeatureOptions().containsKey(feature) && character.getClassFeatureOptions().get(feature).contains(option)}"
+                                       th:onclick="|submitBuilderClassFeatures(${character.getId()}, ${feature.hashCode()}, ${feature.getAllowedOptions()})|"
+                                       th:id="|${feature.hashCode()}-${option.hashCode()}|"
+                                       th:data-option-name="${option.getName()}" checked>
+                                <input type="checkbox" class="custom-control-input"
+                                       th:unless="${character.getClassFeatureOptions().containsKey(feature) && character.getClassFeatureOptions().get(feature).contains(option)}"
+                                       th:onclick="|submitBuilderClassFeatures(${character.getId()}, ${feature.hashCode()}, ${feature.getAllowedOptions()})|"
+                                       th:id="|${feature.hashCode()}-${option.hashCode()}|"
+                                       th:data-option-name="${option.getName()}">
+                                <label class="custom-control-label"
+                                       th:for="|${feature.hashCode()}-${option.hashCode()}|"
+                                       th:text="${option.getName()}">
+                                </label>
+                                <ul th:unless="${option.getEffects().isEmpty()}">
+                                    <li th:each="effect: ${option.getEffects()}" th:text="${effect.getDescription()}">
+                                    </li>
+                                </ul>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <a th:href="|/ui/character/${character.getId()}|">
+            <button class="btn btn-pill btn-primary"><i class="fa fa-book"></i> Go to character sheet</button>
+        </a>
+    </div>
+</div>

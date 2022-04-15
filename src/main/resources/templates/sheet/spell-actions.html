@@ -1,0 +1,40 @@
+<div class="card mb-4">
+    <div class="card-body pl-0 pr-0">
+        <p class="pl-2">
+            <b th:text="|Your spell save is DC${character.getSpellSaveDC()}|"></b>
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>Action Type</th>
+                <th>Name</th>
+                <th>Range</th>
+                <th>Hit/DC</th>
+                <th>Description</th>
+                <th>Casts</th>
+            </tr>
+            <tr th:each="row : ${spellActions}">
+                <td th:text="${row.getActionType().getName()}"></td>
+                <td th:text="${row.getName()}"></td>
+                <td th:text="${row.getRangeDescription()}"></td>
+                <td th:text="${row.getHitBonusOrDC()}"></td>
+                <td th:text="${row.getDamage()}"></td>
+                <td>
+                    <button class="btn btn-success btn-stacked"
+                            th:data-spell="${row.getName()}"
+                            th:data-counter="${row.hashCode()}"
+                            th:onclick="|setSpellCasts(${character.getId()}, this, true)|">
+                        <i class="fa fa-arrow-up"></i>
+                    </button>
+                    <span class="ml-2" th:id="${row.hashCode()}" th:text="${row.getNote()}"></span>
+                    <button class="btn btn-danger btn-stacked"
+                            th:data-spell="${row.getName()}"
+                            th:data-counter="${row.hashCode()}"
+                            th:onclick="|setSpellCasts(${character.getId()}, this, false)|">
+                        <i class="fa fa-arrow-down"></i>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+.dsb-body:before {
+    position: absolute;
+    z-index: 0;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .5;
+    background: #2f3237;
+}
+
+.dsb-body {
+    position: relative;
+    height: 100%;
+    min-height: 100vh;
+    background: url("/images/builder-background.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+.collapsible-content {
+    display: none;
+    overflow: hidden;
+}
+
+.collapsible:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 15px;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
