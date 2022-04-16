@@ -1,14 +1,13 @@
 package com.moppletop.dsb.item;
 
 import com.moppletop.dsb.DarkSoulsBeyondApplication;
+import com.moppletop.dsb.factory.ItemFactory;
 import com.moppletop.dsb.util.SampleData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.NONE,
@@ -18,8 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 )
 public class ItemTests {
 
-    @Autowired
-    ItemFactory itemFactory;
+    @Autowired ItemFactory itemFactory;
 
     @Autowired
     SampleData sampleData;
