@@ -7,7 +7,7 @@ import org.springframework.core.convert.converter.Converter;
 
 import java.util.Set;
 
-@Configuration
+//@Configuration
 public class ConversionServiceConfig {
 
     @Bean

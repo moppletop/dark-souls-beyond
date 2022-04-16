@@ -17,7 +17,7 @@ public enum DamageType {
     NECROTIC("Necrotic"),
     PIERCING("Piercing"),
     POISON("Poison"),
-    RADIENT("Radient"),
+    RADIANT("Radiant"),
     THUNDER("Thunder")
     ;
 

@@ -392,10 +392,8 @@ public class PlayerCharacterService {
             // Fully restore position
             characterEntity.setPosition(character.getMaxPosition());
 
-            int expendedDice = character.getLevel() - character.getPositionDice();
-
             // Restore position dice equal to half of the expended dice
-            characterEntity.setPositionDice(Math.min(character.getLevel(), character.getPositionDice() + (expendedDice / 2)));
+            characterEntity.setPositionDice(Math.min(character.getLevel(), character.getPositionDice() + (character.getLevel() / 2)));
 
             notifyFeaturesOfRest(characterEntity, RestType.LONG);
 
