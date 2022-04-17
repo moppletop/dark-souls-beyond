@@ -2,12 +2,11 @@ package com.moppletop.dsb.domain.dto.spell;
 
 import com.moppletop.dsb.domain.dto.game.Ability;
 import com.moppletop.dsb.domain.dto.game.ActionType;
-import lombok.EqualsAndHashCode;
-import lombok.Value;
+import lombok.*;
 
 import java.util.Objects;
 
-@Value
+@Data
 @EqualsAndHashCode(of = "name")
 public class Spell implements Comparable<Spell> {
 
