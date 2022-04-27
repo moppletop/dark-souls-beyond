@@ -19,14 +19,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @EqualsAndHashCode(of = "id")
@@ -55,14 +48,14 @@ public class PlayerCharacter {
     private final Map<CharacterClassFeature, List<CharacterClassFeature>> classFeatureOptions = new HashMap<>();
 
     @Getter
-    private final Map<Ability, List<Modifier>> abilityScoreModifiers = new HashMap<>();
+    private final Map<Ability, List<Modifier>> abilityScoreModifiers = new EnumMap<>(Ability.class);
     @Getter
-    private final Map<Ability, List<Modifier>> savingThrowModifiers = new HashMap<>();
+    private final Map<Ability, List<Modifier>> savingThrowModifiers = new EnumMap<>(Ability.class);
 
     @Getter
-    private final Map<Skill, List<Modifier>> skillModifiers = new HashMap<>();
+    private final Map<Skill, List<Modifier>> skillModifiers = new EnumMap<>(Skill.class);
     @Getter
-    private final Map<Skill, List<Modifier>> passiveScoreModifiers = new HashMap<>();
+    private final Map<Skill, List<Modifier>> passiveScoreModifiers = new EnumMap<>(Skill.class);
     @Getter
     private final List<String> additionalSenses = new ArrayList<>();
 
@@ -316,7 +309,7 @@ public class PlayerCharacter {
     }
 
     private <K extends Comparable<K>> Map<K, Modification> getModifications(Map<K, List<Modifier>> map) {
-        Map<K, Modification> modifications = new TreeMap<>(Comparator.naturalOrder());
+        Map<K, Modification> modifications = new TreeMap<>();
 
         map.forEach((k, modifiers) -> {
             int score = 0;

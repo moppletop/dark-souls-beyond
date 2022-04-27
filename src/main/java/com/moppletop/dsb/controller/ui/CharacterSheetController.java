@@ -20,12 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -59,7 +54,7 @@ class CharacterSheetController {
     }
 
     private Map<Ability, Modification> getAbilityScoreModifiers(PlayerCharacter character) {
-        Map<Ability, Modification> abilityScoreModifiers = new TreeMap<>(Comparator.comparingInt(Enum::ordinal));
+        Map<Ability, Modification> abilityScoreModifiers = new EnumMap<>(Ability.class);
 
         character.getAbilityScores().forEach((ability, modification) -> {
             int bonus = Calculations.getAbilityScoreModifier(modification.getMod());
