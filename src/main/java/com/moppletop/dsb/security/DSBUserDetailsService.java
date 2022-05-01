@@ -1,4 +1,4 @@
-package com.moppletop.dsb.service;
+package com.moppletop.dsb.security;
 
 import com.moppletop.dsb.system.user.UserService;
 import lombok.RequiredArgsConstructor;

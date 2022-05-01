@@ -1,6 +1,5 @@
 package com.moppletop.dsb.security;
 
-import com.moppletop.dsb.service.DSBUserDetailsService;
 import com.moppletop.dsb.system.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
