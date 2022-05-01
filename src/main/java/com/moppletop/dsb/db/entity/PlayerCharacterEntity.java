@@ -1,24 +1,13 @@
 package com.moppletop.dsb.db.entity;
 
+import com.moppletop.dsb.domain.game.Ability;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
 
@@ -53,8 +42,17 @@ public class PlayerCharacterEntity {
     @Column(name = "class")
     private Integer classId;
 
-    @Column(name = "origin")
-    private Integer originId;
+    @ElementCollection
+    @CollectionTable(
+            name = "character_ability_scores",
+            joinColumns = {
+                    @JoinColumn(name = "character_id", referencedColumnName = "id")
+            }
+    )
+    @MapKeyColumn(name = "ability")
+    @MapKeyEnumerated(EnumType.ORDINAL)
+    @Column(name = "score")
+    private Map<Ability, Integer> abilityScores;
 
     @Column(name = "level", nullable = false)
     private Integer level = 1;

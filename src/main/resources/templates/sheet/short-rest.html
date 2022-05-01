@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p th:text="|Your remaining hit dice: ${character.getOrigin().getPositionDice().getExpression(character.getPositionDice())}|"></p>
+                <p th:text="|Your remaining hit dice: ${character.getCharacterClass().getPositionDice().getExpression(character.getPositionDice())}|"></p>
                 <label for="position-dice-input">Number of hit die used:</label>
                 <input type="text" class="form-control" id="position-dice-input">
                 <label for="position-roll-input">Your roll:</label>

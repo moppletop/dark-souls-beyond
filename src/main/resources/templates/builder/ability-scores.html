@@ -1,0 +1,24 @@
+<div class="row mb-3" id="ability-scores">
+    <div class="col-2" th:each="ability : ${abilities}">
+        <div class="card">
+            <div class="card-body">
+                <label class="card-title"
+                       th:for="|ability-${ability.ordinal()}-input|"
+                       th:text="${ability.getName()}">
+                </label>
+                <input type="text" class="form-control"
+                       th:id="|ability-${ability.ordinal()}-input|"
+                       th:data-ability="${ability}"
+                       th:value="${character.getAbilityScoreBase().getOrDefault(ability, 10)}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        <button type="button" class="btn btn-pill btn-primary"
+                th:onclick="|submitBuilderAbilityScores(${character.getId()})|">Next
+        </button>
+    </div>
+</div>

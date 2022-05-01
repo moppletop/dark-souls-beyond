@@ -1,15 +1,14 @@
 package com.moppletop.dsb.controller.ui;
 
+import com.moppletop.dsb.domain.game.Ability;
 import com.moppletop.dsb.system.effect.effect.SavingThrowEffect;
 import com.moppletop.dsb.system.effect.effect.SkillEffect;
 import com.moppletop.dsb.domain.ClassFeatureTable;
 import com.moppletop.dsb.domain.character.CharacterClass;
 import com.moppletop.dsb.domain.character.CharacterClassFactory;
 import com.moppletop.dsb.domain.character.CharacterClassFeature;
-import com.moppletop.dsb.domain.character.Origin;
 import com.moppletop.dsb.domain.character.PlayerCharacter;
 import com.moppletop.dsb.domain.game.Calculations;
-import com.moppletop.dsb.factory.OriginFactory;
 import com.moppletop.dsb.system.player.PlayerCharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,7 +33,6 @@ import java.util.stream.Collectors;
 class CharacterBuilderController {
 
     private final PlayerCharacterService playerCharacterService;
-    private final OriginFactory originFactory;
     private final CharacterClassFactory classFactory;
 
     @ModelAttribute
@@ -51,9 +49,9 @@ class CharacterBuilderController {
             case "character":
                 title = "Character Information";
                 break;
-            case "origin":
-                title = "Origin";
-                model.addAttribute("origins", originFactory.getAll());
+            case "ability-scores":
+                title = "Ability Scores";
+                model.addAttribute("abilities", Ability.values());
                 break;
             case "class":
                 title = "Class";
@@ -75,19 +73,6 @@ class CharacterBuilderController {
 
         model.addAttribute("title", title);
         model.addAttribute("fragment", step);
-
-        return "builder/root";
-    }
-
-    @GetMapping("/origin/{originId}")
-    public String originInfo(Model model, @PathVariable Integer characterId, @PathVariable Integer originId) {
-        Origin origin = originFactory.getById(originId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        model.addAttribute("title", origin.getName());
-        model.addAttribute("fragment", "origin-show-more");
-        model.addAttribute("origin", origin);
-        model.addAttribute("characterId", characterId);
 
         return "builder/root";
     }

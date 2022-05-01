@@ -26,11 +26,11 @@
                     <div class="card-body">
                         <p class="card-title" th:text="${character.getName()}"></p>
                         <p class="card-text"
-                           th:unless="${character.getCharacterClass() == null || character.getOrigin() == null}"
-                           th:text="|Level ${character.getLevel()} ${character.getCharacterClass().getName()} with ${character.getOrigin().getName()} origin|">
+                           th:unless="${character.getCharacterClass() == null}"
+                           th:text="|Level ${character.getLevel()} ${character.getCharacterClass().getName()}|">
                         </p>
                         <a th:href="|/ui/character/${character.getId()}|"
-                           th:unless="${character.getCharacterClass() == null || character.getOrigin() == null}">
+                           th:unless="${character.getCharacterClass() == null}">
                             <button class="btn btn-pill btn-primary btn-fill"><i class="fa fa-user"></i> Character Sheet
                             </button>
                         </a>

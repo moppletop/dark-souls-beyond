@@ -14,10 +14,18 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#builderNavbarNavDropdown"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse mr-auto" id="builderNavbarNavDropdown">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" th:onclick="|goTo(${character.getId()}, 'character')|">Character Info</a></li>
-            <li class="nav-item" th:unless="${character.getOrigin() == null}"><a class="nav-link" th:onclick="|goTo(${character.getId()}, 'origin')|">Origin</a></li>
-            <li class="nav-item" th:unless="${character.getCharacterClass() == null}"><a class="nav-link" th:onclick="|goTo(${character.getId()}, 'class')|">Class</a></li>
-            <li class="nav-item" th:unless="${character.getCharacterClass() == null}"><a class="nav-link" th:onclick="|goTo(${character.getId()}, 'class-features')|">Class Features</a></li>
+            <li class="nav-item">
+                <a class="nav-link" th:onclick="|goTo(${character.getId()}, 'character')|">Character Info</a>
+            </li>
+            <li class="nav-item" th:unless="${character.getAbilityScores().isEmpty()}">
+                <a class="nav-link" th:onclick="|goTo(${character.getId()}, 'ability-scores')|">Ability Scores</a>
+            </li>
+            <li class="nav-item" th:unless="${character.getCharacterClass() == null}">
+                <a class="nav-link" th:onclick="|goTo(${character.getId()}, 'class')|">Class</a>
+            </li>
+            <li class="nav-item" th:unless="${character.getCharacterClass() == null}">
+                <a class="nav-link" th:onclick="|goTo(${character.getId()}, 'class-features')|">Class Features</a>
+            </li>
         </ul>
     </div>
 </nav>

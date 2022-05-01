@@ -1,11 +1,11 @@
 package com.moppletop.dsb.system.player;
 
+import com.moppletop.dsb.domain.game.Ability;
 import com.moppletop.dsb.system.effect.Item;
 import com.moppletop.dsb.domain.character.CharacterClass;
 import com.moppletop.dsb.domain.character.CharacterClassFactory;
 import com.moppletop.dsb.domain.character.CharacterClassFeature;
 import com.moppletop.dsb.domain.character.NewPosition;
-import com.moppletop.dsb.domain.character.Origin;
 import com.moppletop.dsb.domain.character.PlayerCharacter;
 import com.moppletop.dsb.domain.character.SpellCaster;
 import com.moppletop.dsb.domain.game.Calculations;
@@ -24,7 +24,6 @@ import com.moppletop.dsb.exception.PlayerCharacterInvalidException;
 import com.moppletop.dsb.exception.SpellInvalidException;
 import com.moppletop.dsb.exception.UserInvalidException;
 import com.moppletop.dsb.factory.ItemFactory;
-import com.moppletop.dsb.factory.OriginFactory;
 import com.moppletop.dsb.factory.SpellFactory;
 import com.moppletop.dsb.db.repository.InventoryRepository;
 import com.moppletop.dsb.db.repository.PlayerCharacterRepository;
@@ -57,7 +56,6 @@ public class PlayerCharacterService {
     private final SpellRepository spellRepository;
 
     private final CharacterClassFactory characterClassFactory;
-    private final OriginFactory originFactory;
     private final ItemFactory itemFactory;
     private final SpellFactory spellFactory;
 
@@ -165,18 +163,26 @@ public class PlayerCharacterService {
         }
     }
 
-    public void setOrigin(Integer characterId, Integer originId) {
+    public void setAbilityScore(Integer characterId, Map<Ability, Integer> abilityScores) {
         PlayerCharacterEntity characterEntity = characterRepository.findById(characterId)
                 .orElseThrow(PlayerCharacterInvalidException::new);
 
-        if (Objects.equals(characterEntity.getOriginId(), originId)) {
-            return;
+        if (abilityScores == null) {
+            throw new PlayerCharacterInvalidException("Ability scores cannot be null");
         }
 
-        Origin origin = originFactory.getById(originId)
-                .orElseThrow(() -> new PlayerCharacterInvalidException(originId + " is not a valid origin id"));
+        if (abilityScores.size() < Ability.values().length) {
+            throw new PlayerCharacterInvalidException("All ability scores must have values");
+        }
 
-        characterEntity.setOriginId(origin.getId());
+        for (Integer score : abilityScores.values()) {
+            if (score == null || score < 1 || score > 20) {
+                throw new PlayerCharacterInvalidException("Ability scores must be between 1 and 20.");
+            }
+        }
+
+        characterEntity.setAbilityScores(abilityScores);
+
         characterRepository.save(characterEntity);
     }
 
