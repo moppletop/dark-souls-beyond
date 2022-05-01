@@ -63,7 +63,8 @@ public class SpellFactory {
         }
 
         if (name != null) {
-            stream = stream.filter(spell -> spell.getName().contains(name));
+            String nameLower = name.toLowerCase();
+            stream = stream.filter(spell -> spell.getName().toLowerCase().contains(nameLower));
         }
 
         stream = stream.sorted()
