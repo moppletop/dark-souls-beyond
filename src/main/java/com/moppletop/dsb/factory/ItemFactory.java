@@ -1,8 +1,8 @@
 package com.moppletop.dsb.factory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moppletop.dsb.config.annotation.Item;
-import com.moppletop.dsb.config.annotation.item.ItemCategory;
+import com.moppletop.dsb.system.effect.Item;
+import com.moppletop.dsb.system.effect.item.ItemCategory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

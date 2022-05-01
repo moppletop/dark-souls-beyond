@@ -1,9 +1,9 @@
 package com.moppletop.dsb.util;
 
-import com.moppletop.dsb.domain.dto.character.PlayerCharacter;
-import com.moppletop.dsb.domain.dto.user.User;
-import com.moppletop.dsb.service.PlayerCharacterService;
-import com.moppletop.dsb.service.UserService;
+import com.moppletop.dsb.domain.character.PlayerCharacter;
+import com.moppletop.dsb.system.user.User;
+import com.moppletop.dsb.system.player.PlayerCharacterService;
+import com.moppletop.dsb.system.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

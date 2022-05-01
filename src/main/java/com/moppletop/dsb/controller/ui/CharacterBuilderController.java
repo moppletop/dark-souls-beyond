@@ -1,16 +1,16 @@
 package com.moppletop.dsb.controller.ui;
 
-import com.moppletop.dsb.config.annotation.effect.SavingThrowEffect;
-import com.moppletop.dsb.config.annotation.effect.SkillEffect;
-import com.moppletop.dsb.domain.dto.ClassFeatureTable;
-import com.moppletop.dsb.domain.dto.character.CharacterClass;
-import com.moppletop.dsb.domain.dto.character.CharacterClassFactory;
-import com.moppletop.dsb.domain.dto.character.CharacterClassFeature;
-import com.moppletop.dsb.domain.dto.character.Origin;
-import com.moppletop.dsb.domain.dto.character.PlayerCharacter;
-import com.moppletop.dsb.domain.dto.game.Calculations;
+import com.moppletop.dsb.system.effect.effect.SavingThrowEffect;
+import com.moppletop.dsb.system.effect.effect.SkillEffect;
+import com.moppletop.dsb.domain.ClassFeatureTable;
+import com.moppletop.dsb.domain.character.CharacterClass;
+import com.moppletop.dsb.domain.character.CharacterClassFactory;
+import com.moppletop.dsb.domain.character.CharacterClassFeature;
+import com.moppletop.dsb.domain.character.Origin;
+import com.moppletop.dsb.domain.character.PlayerCharacter;
+import com.moppletop.dsb.domain.game.Calculations;
 import com.moppletop.dsb.factory.OriginFactory;
-import com.moppletop.dsb.service.PlayerCharacterService;
+import com.moppletop.dsb.system.player.PlayerCharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

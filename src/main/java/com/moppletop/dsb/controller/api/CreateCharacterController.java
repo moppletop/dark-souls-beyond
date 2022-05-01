@@ -1,9 +1,9 @@
 package com.moppletop.dsb.controller.api;
 
-import com.moppletop.dsb.domain.dto.character.PlayerCharacter;
-import com.moppletop.dsb.domain.dto.external.CharacterResponse;
-import com.moppletop.dsb.domain.dto.external.CreateCharacterRequest;
-import com.moppletop.dsb.service.PlayerCharacterService;
+import com.moppletop.dsb.domain.character.PlayerCharacter;
+import com.moppletop.dsb.controller.api.model.CharacterResponse;
+import com.moppletop.dsb.controller.api.model.CreateCharacterRequest;
+import com.moppletop.dsb.system.player.PlayerCharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

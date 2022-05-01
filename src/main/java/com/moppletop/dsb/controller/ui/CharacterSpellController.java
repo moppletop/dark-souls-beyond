@@ -1,10 +1,10 @@
 package com.moppletop.dsb.controller.ui;
 
-import com.moppletop.dsb.domain.dto.character.PlayerCharacter;
-import com.moppletop.dsb.domain.dto.spell.Spell;
-import com.moppletop.dsb.domain.dto.spell.SpellFamily;
+import com.moppletop.dsb.domain.character.PlayerCharacter;
+import com.moppletop.dsb.domain.spell.Spell;
+import com.moppletop.dsb.domain.spell.SpellFamily;
 import com.moppletop.dsb.factory.SpellFactory;
-import com.moppletop.dsb.service.PlayerCharacterService;
+import com.moppletop.dsb.system.player.PlayerCharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

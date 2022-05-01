@@ -1,7 +1,7 @@
 package com.moppletop.dsb.factory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moppletop.dsb.domain.dto.character.Origin;
+import com.moppletop.dsb.domain.character.Origin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,16 +1,16 @@
 package com.moppletop.dsb.controller.ui;
 
-import com.moppletop.dsb.domain.dto.character.AbilityAction;
-import com.moppletop.dsb.domain.dto.character.CharacterClass;
-import com.moppletop.dsb.domain.dto.character.LearntSpell;
-import com.moppletop.dsb.domain.dto.character.Modification;
-import com.moppletop.dsb.domain.dto.character.PlayerCharacter;
-import com.moppletop.dsb.domain.dto.character.SpellAction;
-import com.moppletop.dsb.domain.dto.game.Ability;
-import com.moppletop.dsb.domain.dto.game.ActionType;
-import com.moppletop.dsb.domain.dto.game.Calculations;
-import com.moppletop.dsb.domain.dto.spell.Spell;
-import com.moppletop.dsb.service.PlayerCharacterService;
+import com.moppletop.dsb.domain.character.AbilityAction;
+import com.moppletop.dsb.domain.character.CharacterClass;
+import com.moppletop.dsb.domain.character.LearntSpell;
+import com.moppletop.dsb.domain.character.Modification;
+import com.moppletop.dsb.domain.character.PlayerCharacter;
+import com.moppletop.dsb.domain.character.SpellAction;
+import com.moppletop.dsb.domain.game.Ability;
+import com.moppletop.dsb.domain.game.ActionType;
+import com.moppletop.dsb.domain.game.Calculations;
+import com.moppletop.dsb.domain.spell.Spell;
+import com.moppletop.dsb.system.player.PlayerCharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

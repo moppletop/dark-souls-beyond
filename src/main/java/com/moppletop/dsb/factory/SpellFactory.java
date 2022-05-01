@@ -1,8 +1,8 @@
 package com.moppletop.dsb.factory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moppletop.dsb.domain.dto.spell.Spell;
-import com.moppletop.dsb.domain.dto.spell.SpellFamily;
+import com.moppletop.dsb.domain.spell.Spell;
+import com.moppletop.dsb.domain.spell.SpellFamily;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

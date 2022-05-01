@@ -1,7 +1,7 @@
 package com.moppletop.dsb.game;
 
-import com.moppletop.dsb.domain.dto.game.Ability;
-import com.moppletop.dsb.domain.dto.game.Skill;
+import com.moppletop.dsb.domain.game.Ability;
+import com.moppletop.dsb.domain.game.Skill;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
