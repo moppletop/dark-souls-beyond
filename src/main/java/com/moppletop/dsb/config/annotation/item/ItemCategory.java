@@ -40,8 +40,9 @@ public enum ItemCategory {
     CHIME("Chime", EquipmentType.WEAPON),
 
     RING("Ring", EquipmentType.RING),
-    SOUL("Soul")
+    SOUL("Soul"),
 
+    CUSTOM("Custom")
     ;
 
     private final String name;
