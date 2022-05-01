@@ -18,6 +18,32 @@
 
         <div class="row">
             <div class="col-md-10">
+                <h4 class="card-title">Position</h4>
+                <p>
+                    <b>Position Dice: </b>
+                    <span th:text="${class.getPositionDice().getExpression(1) + ' per level'}"></span>
+                </p>
+                <p>
+                    <b>Position at 1st Level: </b>
+                    <span th:text="${class.getPositionDice().getMax() + ' + your Constitution modifier'}"></span>
+                </p>
+                <p><b>Position gained on each Level Up: </b>New Level + your Constitution modifier</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <h4 class="card-title">Bloodied Effects</h4>
+                <p class="mb-0" th:text="${'During combat, when reduced to 50% of their starting Position pool, ' + class.getName() + 's gain the following benefits:'}"></p>
+                <ul>
+                    <li th:each="effect : ${class.getBloodiedEffects()}" th:text="${effect.getDescription()}">
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
                 <h4 class="card-title">Starting Equipment</h4>
                 <ul>
                     <li th:each="item : ${class.getStartingItems()}" th:text="${item}">

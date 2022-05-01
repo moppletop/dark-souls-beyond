@@ -48,7 +48,7 @@
             </div>
             <div class="modal-body">
                 <p><i>Remember you only gain your temporary position at the start of your turn.</i></p>
-                <p th:text="|Your temporary position: ${character.getOrigin().getPositionDice().getExpression(character.getLevel())}|"></p>
+                <p th:text="|Your temporary position: ${character.getCharacterClass().getPositionDice().getExpression(character.getLevel())}|"></p>
                 <label for="combat-position-input">Your roll:</label>
                 <input type="text" class="form-control" id="combat-position-input">
             </div>
@@ -58,7 +58,7 @@
                     OK
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        th:data-expression="${character.getOrigin().getPositionDice().getExpression(character.getLevel())}"
+                        th:data-expression="${character.getCharacterClass().getPositionDice().getExpression(character.getLevel())}"
                         th:onclick="|rollAndStartCombat(${character.getId()}, this)|">
                     Roll For Me
                 </button>

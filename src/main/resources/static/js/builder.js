@@ -2,14 +2,21 @@ function submitBuilderCharacter(characterId) {
     const request = {name: document.getElementById('character-info-name').value};
 
     doPost('/api/character/' + characterId + '/name/', request).then(response => {
-        window.location.href = '/ui/character/' + response.characterId + '/builder/origin';
+        window.location.href = '/ui/character/' + response.characterId + '/builder/ability-scores';
     });
 }
 
-function submitBuilderOrigin(characterId, originId) {
-    const request = {originId: originId};
+function submitBuilderAbilityScores(characterId) {
+    const scores = {};
+    const parent = document.getElementById('ability-scores');
+    const elements = parent.getElementsByTagName('input');
 
-    doPost('/api/character/' + characterId + '/origin/', request).then(response => {
+    for (let element of elements) {
+        const ability = element.getAttribute('data-ability');
+        scores[ability] = element.value;
+    }
+
+    doPost('/api/character/' + characterId + '/ability-scores/', { scores: scores }).then(response => {
         window.location.href = '/ui/character/' + response.characterId + '/builder/class';
     });
 }

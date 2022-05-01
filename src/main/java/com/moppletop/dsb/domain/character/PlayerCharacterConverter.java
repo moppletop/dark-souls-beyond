@@ -15,7 +15,6 @@ import com.moppletop.dsb.db.entity.PlayerCharacterEntity;
 import com.moppletop.dsb.db.entity.SpellEntity;
 import com.moppletop.dsb.exception.PlayerCharacterInvalidException;
 import com.moppletop.dsb.factory.ItemFactory;
-import com.moppletop.dsb.factory.OriginFactory;
 import com.moppletop.dsb.factory.SpellFactory;
 import com.moppletop.dsb.system.player.PlayerCharacterService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +29,6 @@ import java.util.Optional;
 public class PlayerCharacterConverter implements Converter<PlayerCharacterEntity, PlayerCharacter> {
 
     private final CharacterClassFactory characterClassFactory;
-    private final OriginFactory originFactory;
     private final ItemFactory itemFactory;
     private final SpellFactory spellFactory;
 
@@ -51,13 +49,8 @@ public class PlayerCharacterConverter implements Converter<PlayerCharacterEntity
             character.setCharacterClass(characterClass);
         }
 
-        Origin origin = null;
-        if (entity.getOriginId() != null) {
-            origin = originFactory.getById(entity.getOriginId())
-                    .orElseThrow(() -> new PlayerCharacterInvalidException("Origin with id " + entity.getOriginId() + " does not exist!"));
-
-            character.setOrigin(origin);
-        }
+        character.setBaseAbilityScores(entity.getAbilityScores());
+        character.modifySpeed("Base", 30);
 
         if (entity.getPosition() != null) {
             character.setPosition(entity.getPosition());
@@ -143,10 +136,10 @@ public class PlayerCharacterConverter implements Converter<PlayerCharacterEntity
         }
 
         // Give base position
-        if (origin != null) {
-            int maxPosition = Calculations.getMaxPosition(origin.getPositionDice(), level, character.getAbilityScore(Ability.CONSTITUTION));
+        if (characterClass != null) {
+            int maxPosition = Calculations.getMaxPosition(characterClass.getPositionDice(), level, character.getAbilityScore(Ability.CONSTITUTION));
 
-            character.modifyMaxPosition("Level " + level + " with origin (" + origin.getName() + ")", maxPosition);
+            character.modifyMaxPosition("Level " + level + " " + characterClass.getName(), maxPosition);
         }
 
         // Set max health if none
@@ -155,10 +148,10 @@ public class PlayerCharacterConverter implements Converter<PlayerCharacterEntity
         }
 
         // Bloodied effects
-        if (origin != null && character.isBloodied()) {
-            for (Effect effect : origin.getBloodiedEffects()) {
-                effect.onApply(character, origin);
-                effect.onPostApply(character, origin);
+        if (characterClass != null && character.isBloodied()) {
+            for (Effect effect : characterClass.getBloodiedEffects()) {
+                effect.onApply(character, characterClass);
+                effect.onPostApply(character, characterClass);
             }
         }
 
@@ -188,7 +181,7 @@ public class PlayerCharacterConverter implements Converter<PlayerCharacterEntity
         }
 
         // TODO fix
-        if (origin != null) {
+        if (characterClass != null) {
             character.addAbility(ActionType.BONUS, () -> "Two Weapon Fighting", TwoWeaponFighting.DESCRIPTION, null);
         }
 

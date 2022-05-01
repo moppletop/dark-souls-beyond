@@ -13,7 +13,7 @@ import com.moppletop.dsb.controller.api.model.RestRequest;
 import com.moppletop.dsb.controller.api.model.SetClassRequest;
 import com.moppletop.dsb.controller.api.model.SetItemAmountRequest;
 import com.moppletop.dsb.controller.api.model.SetNameRequest;
-import com.moppletop.dsb.controller.api.model.SetOriginRequest;
+import com.moppletop.dsb.controller.api.model.SetAbilityScoresRequest;
 import com.moppletop.dsb.controller.api.model.SoulsResponse;
 import com.moppletop.dsb.controller.api.model.SpellCastsRequest;
 import com.moppletop.dsb.controller.api.model.SpellRequest;
@@ -91,12 +91,12 @@ public class CharacterController {
         return ResponseEntity.ok(new CharacterResponse(characterId));
     }
 
-    @PostMapping("/origin")
-    public ResponseEntity<CharacterResponse> setOrigin(
+    @PostMapping("/ability-scores")
+    public ResponseEntity<CharacterResponse> setAbilityScores(
             @PathVariable(required = false) Integer characterId,
-            @RequestBody SetOriginRequest request
+            @RequestBody SetAbilityScoresRequest request
     ) {
-        playerCharacterService.setOrigin(characterId, request.getOriginId());
+        playerCharacterService.setAbilityScore(characterId, request.getScores());
         return ResponseEntity.ok(new CharacterResponse(characterId));
     }
 

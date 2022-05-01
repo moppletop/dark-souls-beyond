@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body">
                 <ul>
-                    <li th:each="modifier : ${character.getOrigin().getBloodiedEffects()}" th:text="${modifier.getDescription()}">
+                    <li th:each="modifier : ${character.getCharacterClass().getBloodiedEffects()}" th:text="${modifier.getDescription()}">
                     </li>
                 </ul>
             </div>

@@ -37,8 +37,6 @@ public class PlayerCharacter {
     @Setter
     private CharacterClass characterClass;
     @Getter
-    private Origin origin;
-    @Getter
     @Setter
     private int level;
 
@@ -47,6 +45,8 @@ public class PlayerCharacter {
     @Getter
     private final Map<CharacterClassFeature, List<CharacterClassFeature>> classFeatureOptions = new HashMap<>();
 
+    @Getter
+    private final Map<Ability, Integer> abilityScoreBase = new EnumMap<>(Ability.class);
     @Getter
     private final Map<Ability, List<Modifier>> abilityScoreModifiers = new EnumMap<>(Ability.class);
     @Getter
@@ -135,6 +135,12 @@ public class PlayerCharacter {
     /*
         Ability scores & saving throws
      */
+
+    public void setBaseAbilityScores(Map<Ability, Integer> abilityScores) {
+        this.abilityScoreBase.putAll(abilityScores);
+
+        abilityScores.forEach((ability, score) -> modifyAbilityScore("Base", ability, score));
+    }
 
     public void modifyAbilityScore(String source, Ability ability, int mod) {
         Modifier modifier = new Modifier(source, mod);
@@ -266,14 +272,6 @@ public class PlayerCharacter {
 
     public void addResistance(String source, String to, ResistanceType resistanceType) {
         resistances.add(new Resistance(source, to, resistanceType));
-    }
-
-    public void setOrigin(Origin origin) {
-        this.origin = origin;
-
-        origin.getAbilityScores().forEach((abilityScore, base) -> abilityScoreModifiers.get(abilityScore).add((new Modifier(origin.getName(), base))));
-
-        speedModifiers.add(new Modifier("Base Speed", 30));
     }
 
     public void derive() {
@@ -439,7 +437,7 @@ public class PlayerCharacter {
      */
 
     public void assertComplete() {
-        if (origin == null || characterClass == null) {
+        if (characterClass == null) {
             throw new PlayerCharacterInvalidException("Player character is not complete");
         }
     }
