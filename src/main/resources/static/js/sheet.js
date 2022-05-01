@@ -25,6 +25,14 @@ function changeHealth(characterId, increase) {
     element.value = '';
 }
 
+function rollAndStartCombat(characterId, element) {
+    const expression = element.getAttribute('data-expression');
+
+    rollDice(expression).then(result => {
+        callPositionEndpoint(characterId, {position: result.total, action: 'START_COMBAT'});
+    });
+}
+
 function startCombat(characterId) {
     const element = document.getElementById('combat-position-input');
     const value = parseInt(element.value);

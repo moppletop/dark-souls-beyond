@@ -6,19 +6,31 @@
         <div class="row">
 
             <div class="col-4">
-                <button class="btn btn-success btn-stacked" th:onclick="|changeHealth(${character.getId()}, true)|">Heal</button>
+                <button class="btn btn-success btn-stacked" th:onclick="|changeHealth(${character.getId()}, true)|">
+                    Heal
+                </button>
                 <input type="text" class="form-control btn-stacked" id="heal-damage-input">
-                <button class="btn btn-danger btn-stacked" th:onclick="|changeHealth(${character.getId()}, false)|">Damage</button>
+                <button class="btn btn-danger btn-stacked" th:onclick="|changeHealth(${character.getId()}, false)|">
+                    Damage
+                </button>
             </div>
 
             <div class="col-4">
-                <p class="position-counter" id="position-counter" th:text="|${character.getPosition()}/${character.getMaxPosition()}|"></p>
+                <p class="position-counter" id="position-counter"
+                   th:text="|${character.getPosition()}/${character.getMaxPosition()}|">
+                </p>
             </div>
 
             <div class="col-4">
-                <button class="btn btn btn-primary btn-stacked" data-toggle="modal" data-target="#start-combat">Start Combat</button>
-                <button class="btn btn-secondary btn-stacked" th:onclick="|setPosition(${character.getId()})|">Set Position</button>
-                <button class="btn btn-warning btn-stacked" th:onclick="|stopCombat(${character.getId()})|">Stop Combat</button>
+                <button class="btn btn btn-primary btn-stacked" data-toggle="modal" data-target="#start-combat">Start
+                    Combat
+                </button>
+                <button class="btn btn-secondary btn-stacked" th:onclick="|setPosition(${character.getId()})|">Set
+                    Position
+                </button>
+                <button class="btn btn-warning btn-stacked" th:onclick="|stopCombat(${character.getId()})|">Stop
+                    Combat
+                </button>
             </div>
 
         </div>
@@ -41,7 +53,15 @@
                 <input type="text" class="form-control" id="combat-position-input">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" th:onclick="|startCombat(${character.getId()})|">OK</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        th:onclick="|startCombat(${character.getId()})|">
+                    OK
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        th:data-expression="${character.getOrigin().getPositionDice().getExpression(character.getLevel())}"
+                        th:onclick="|rollAndStartCombat(${character.getId()}, this)|">
+                    Roll For Me
+                </button>
             </div>
         </div>
     </div>
